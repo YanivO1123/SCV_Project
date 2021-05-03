@@ -3,7 +3,7 @@ import torch
 from PIL import Image
 
 # Model
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+model = torch.hub.load('ultralytics/yolov3', 'yolov3s')
 
 # Images
 for f in ['zidane.jpg', 'bus.jpg']:  # download 2 images
