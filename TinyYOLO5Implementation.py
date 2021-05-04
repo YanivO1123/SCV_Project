@@ -17,7 +17,10 @@ class TinyYolo5(torch.nn.Module):
 
         self.activation_function = activation_function()
 
+<<<<<<< HEAD
         self.layers = []
 
+=======
+>>>>>>> 3f4db9af1e133d08eb39c1d732ff88df492a5365
     def forward(self, input: torch.Tensor):
         return self.layers(input)
