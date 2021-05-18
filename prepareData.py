@@ -43,10 +43,11 @@ for file_index in list_ara2012:
                     leaf_y.append(y)
 
         bbox = [np.min(leaf_x), np.min(leaf_y), np.max(leaf_x), np.max(leaf_y)]
-        width = (bbox[2] - bbox[0]) / image_width  # Width of bbox
-        height = bbox[3] - bbox[1] / image_height  # Height of bbox
-        normalized_bbox = [bbox[0] / image_width, bbox[1],image_height, bbox[2] / image_width, bbox[3] / image_height]
-        f.write("%d %.6f %.6f %.6f %.6f\n" % (1, normalized_bbox[0], normalized_bbox[1], width, height))
+        box_width = min((bbox[2] - bbox[0]) / image_width, 1)  # Width of bbox, max 1
+        box_height = min((bbox[3] - bbox[1]) / image_height, 1)  # Height of bbox
+        normalized_bbox = [min(bbox[0] / image_width, 1), min(bbox[1]/image_height,1),      # Normalize the important 2
+                           min(bbox[2] / image_width, 1), min(bbox[3] / image_height, 1)]  # And also the other 2
+        f.write("%d %.6f %.6f %.6f %.6f\n" % (1, normalized_bbox[0], normalized_bbox[1], box_width, box_height))
 
 # Old - generates BBOXes based on the BBOX data that appears wrong
 # Genereate the labels, normalized
