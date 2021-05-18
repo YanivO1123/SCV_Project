@@ -29,14 +29,12 @@ for file_index in list_ara2012:
     segmented_image = cv2.imread("original_dataset/Ara2012/ara2012_plant" + file_index + "_label.png")
     f = open("PyTorch_YOLOv4/leaf_data/labels/ara2012_plant" + file_index + "_rgb.txt", "w+")
     image_shape = np.shape(segmented_image)
+    image_height = image_shape[0]
+    image_width = image_shape[1]
     list_of_colors = np.unique(np.reshape([color for color in segmented_image[:,:]], newshape=(image_shape[0]*image_shape[1], 3)), axis=0)
-    leaves_bboxes = []
     for color in list_of_colors[1:]:
         leaf_x = []
         leaf_y = []
-        # print("color: ", color)
-        # print(len(segmented_image))
-        # print(len(segmented_image[0]))
         for x in range(len(segmented_image)):
             for y in range(len(segmented_image[x])):
                 if color in segmented_image[x, y]:
@@ -45,10 +43,10 @@ for file_index in list_ara2012:
                     leaf_y.append(y)
 
         bbox = [np.min(leaf_x), np.min(leaf_y), np.max(leaf_x), np.max(leaf_y)]
-        width = bbox[2] - bbox[0]  # Width of bbox
-        height = bbox[3] - bbox[1]  # Height of bbox
-
-        f.write("%d %.6f %.6f %.6f %.6f\n" % (1, bbox[0], bbox[1], width, height))
+        width = (bbox[2] - bbox[0]) / image_width  # Width of bbox
+        height = bbox[3] - bbox[1] / image_height  # Height of bbox
+        normalized_bbox = [bbox[0] / image_width, bbox[1],image_height, bbox[2] / image_width, bbox[3] / image_height]
+        f.write("%d %.6f %.6f %.6f %.6f\n" % (1, normalized_bbox[0], normalized_bbox[1], width, height))
 
 # Old - generates BBOXes based on the BBOX data that appears wrong
 # Genereate the labels, normalized
