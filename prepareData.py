@@ -105,8 +105,12 @@ print("Finished generating labels")
 # Create the train.txt and text.txt
 images_list_to_write = []
 directory = os.fsencode("original_dataset/Ara2012/")
-target_file = open("leaf_2012_train.txt", "w+")
-shapes_target_file = "leaf_2012_train.shapes"
+target_file_train = open("leaf_2012_train.txt", "w+")
+target_file_test = open("leaf_2012_test.txt", "w+")
+target_file_val = open("leaf_2012_val.txt", "w+")
+shapes_target_file_train = "leaf_2012_train.shapes"
+shapes_target_file_test = "leaf_2012_test.shapes"
+shapes_target_file_val = "leaf_2012_val.shapes"
 
 # iterate over the files and add them to array
 for file in os.listdir(directory):
@@ -118,7 +122,11 @@ for file in os.listdir(directory):
         # print(im.shape[0], im.shape[1])
         # shapes_to_write.append([im.shape[0], im.shape[1]])
 # save the array into a txt file
-np.savetxt(f"PyTorch_YOLOv4/leaf_data/{target_file.name}", images_list_to_write, delimiter="", newline="\n", fmt="%s")
-np.savetxt(f"PyTorch_YOLOv4/leaf_data/{shapes_target_file}", shapes_to_write, delimiter=" ", newline="\n", fmt="%s %s")
+np.savetxt(f"PyTorch_YOLOv4/leaf_data/{target_file_train.name}", images_list_to_write, delimiter="", newline="\n", fmt="%s")
+np.savetxt(f"PyTorch_YOLOv4/leaf_data/{target_file_test.name}", images_list_to_write, delimiter="", newline="\n", fmt="%s")
+np.savetxt(f"PyTorch_YOLOv4/leaf_data/{target_file_val.name}", images_list_to_write, delimiter="", newline="\n", fmt="%s")
+np.savetxt(f"PyTorch_YOLOv4/leaf_data/{shapes_target_file_train}", shapes_to_write, delimiter=" ", newline="\n", fmt="%s %s")
+np.savetxt(f"PyTorch_YOLOv4/leaf_data/{shapes_target_file_test}", shapes_to_write, delimiter=" ", newline="\n", fmt="%s %s")
+np.savetxt(f"PyTorch_YOLOv4/leaf_data/{shapes_target_file_val}", shapes_to_write, delimiter=" ", newline="\n", fmt="%s %s")
 
 print("Finished generating the train.txt file and .shapes file")
