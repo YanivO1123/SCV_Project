@@ -309,7 +309,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
             self.img_files = sorted(
                 [x.replace('/', os.sep) for x in f if os.path.splitext(x)[-1].lower() in img_formats])
         except Exception as e:
-            raise Exception('Error loading data from %s: %s\nSee %s' % (path, e, help_url))
+            raise Exception(f'Error loading data from {path}: {e} \n See {help_url}') # % (path, e, help_url))
 
         n = len(self.img_files)
         assert n > 0, 'No images found in %s. See %s' % (path, help_url)
@@ -342,6 +342,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
 
         # Get labels
         labels, shapes = zip(*[cache[x] for x in self.img_files])
+
         self.shapes = np.array(shapes, dtype=np.float64)
         self.labels = list(labels)
 
@@ -373,8 +374,12 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
         create_datasubset, extract_bounding_boxes, labels_loaded = False, False, False
         nm, nf, ne, ns, nd = 0, 0, 0, 0, 0  # number missing, found, empty, datasubset, duplicate
         pbar = tqdm(self.label_files)
+        # print("Am I reached 1?")
         for i, file in enumerate(pbar):
+            # print("Am I reached 2?")
             l = self.labels[i]  # label
+            print("This is l ", l)
+            # print("This is labels ", self.labels)
             if l.shape[0]:
                 assert l.shape[1] == 5, '> 5 label columns: %s' % file
                 assert (l >= 0).all(), 'negative labels: %s' % file
