@@ -32,8 +32,7 @@ for file_index in list_ara2012:
         leaf_y = []
         for x in range(len(segmented_image)):
             for y in range(len(segmented_image[x])):
-                if color in segmented_image[x, y]:
-                    # print(x, y)
+                if (color == segmented_image[x, y]).all():
                     leaf_x.append(x)
                     leaf_y.append(y)
 
