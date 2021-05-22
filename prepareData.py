@@ -3,11 +3,6 @@ import os
 import numpy as np
 import cv2
 
-# c1 = lower left corner
-# c2 = upper left corner
-# c3 = upper right corner
-# c4 = lower right corner
-
 list_ara2012 = ["%03d" % i for i in range(1, 121)]
 list_ara2013_canon = ["%03d" % i for i in range(1, 166)]
 
