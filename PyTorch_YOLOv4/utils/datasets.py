@@ -374,12 +374,8 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
         create_datasubset, extract_bounding_boxes, labels_loaded = False, False, False
         nm, nf, ne, ns, nd = 0, 0, 0, 0, 0  # number missing, found, empty, datasubset, duplicate
         pbar = tqdm(self.label_files)
-        # print("Am I reached 1?")
         for i, file in enumerate(pbar):
-            # print("Am I reached 2?")
             l = self.labels[i]  # label
-            print("This is l ", l)
-            # print("This is labels ", self.labels)
             if l.shape[0]:
                 assert l.shape[1] == 5, '> 5 label columns: %s' % file
                 assert (l >= 0).all(), 'negative labels: %s' % file
