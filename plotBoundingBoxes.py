@@ -3,7 +3,6 @@ import cv2
 import numpy as np
 import pandas as pd
 
-
 list_ara2012 = ["%03d" % i for i in range(119, 120)]
 #list_ara2013_canon = ["%03d" % i for i in range(1, 166)]
 

@@ -369,7 +369,7 @@ def train(hyp, opt, device, tb_writer=None):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, default='', help='initial weights path') # default='yolov4.pt'
-    parser.add_argument('--cfg', type=str, default='cfg/yolov4-tiny.cfg', help='model.yaml path')
+    parser.add_argument('--cfg', type=str, default='cfg/yolov4-tiny-leaf.cfg', help='model.yaml path')
     parser.add_argument('--data', type=str, default='leaf_data/leaf.yaml', help='data.yaml path')
     parser.add_argument('--hyp', type=str, default='leaf_data/hyp.scratch.yaml', help='hyperparameters path, i.e. data/hyp.scratch.yaml')
     parser.add_argument('--epochs', type=int, default=300)

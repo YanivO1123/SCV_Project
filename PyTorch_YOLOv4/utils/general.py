@@ -888,8 +888,10 @@ def fitness(x):
 def output_to_target(output, width, height):
     # Convert model output to target format [batch_id, class_id, x, y, w, h, conf]
     if isinstance(output, torch.Tensor):
-        output = output.cpu().numpy()
-
+        output = output.cpu().detach().numpy()
+    # Mine
+    # This seems to have solved the problem. Was a list of tensor, turned into a numpy
+    output = torch.stack(output).cpu().numpy()
     targets = []
     for i, o in enumerate(output):
         if o is not None:
@@ -903,7 +905,6 @@ def output_to_target(output, width, height):
                 cls = int(pred[5])
 
                 targets.append([i, cls, x, y, w, h, conf])
-
     return np.array(targets)
 
 
