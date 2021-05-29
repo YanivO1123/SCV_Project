@@ -1,0 +1,31 @@
+{
+    "os": "Darwin-20.4.0-x86_64-i386-64bit",
+    "python": "3.6.6",
+    "heartbeatAt": "2021-05-29T09:23:22.561105",
+    "startedAt": "2021-05-29T09:23:17.249876",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "--batch",
+        "0",
+        "--epochs",
+        "1",
+        "--data",
+        "leaf.yaml",
+        "--weights",
+        "yolov3.pt"
+    ],
+    "state": "running",
+    "program": "train.py",
+    "codePath": "yolov3/train.py",
+    "git": {
+        "remote": "https://github.com/YanivO1123/SCV_Project.git",
+        "commit": "fb4f134410a8c3fa48068679971a6ec65f9fc753"
+    },
+    "email": "s.c.noorthoek@student.tudelft.nl",
+    "root": "/Users/sterre/Documents/CS/CV/SCV_Project",
+    "host": "MacBook-Pro-van-Sterre.local",
+    "username": "sterre",
+    "executable": "/Users/sterre/.pyenv/versions/3.6.6/bin/python"
+}
