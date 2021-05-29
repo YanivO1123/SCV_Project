@@ -3,7 +3,7 @@ import os
 import numpy as np
 import cv2
 
-# Where is the data to augment?
+# Where is the original_yolo_data to augment?
 images_data_directory = "all_images_location/actual_images_dir"
 label_images_data_directory = "all_images_location/label_(color)_images_dir"
 
@@ -11,9 +11,9 @@ num_images_to_generate = 10000
 
 # Instantiate the augmentor
 p = Augmentor.Pipeline(images_data_directory)
-# Point to a directory containing ground truth data.
-# Images with the same file names will be added as ground truth data
-# and augmented in parallel to the original data.
+# Point to a directory containing ground truth original_yolo_data.
+# Images with the same file names will be added as ground truth original_yolo_data
+# and augmented in parallel to the original original_yolo_data.
 p.ground_truth(label_images_data_directory)
 
 # Add operations to the pipeline
