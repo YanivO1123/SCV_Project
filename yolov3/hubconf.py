@@ -102,8 +102,8 @@ if __name__ == '__main__':
     import numpy as np
     from PIL import Image
 
-    imgs = [Image.open('data/example_images/bus.jpg'),  # PIL
-            'data/images/zidane.jpg',  # filename
+    imgs = [Image.open('original_yolo_data/example_images/bus.jpg'),  # PIL
+            'original_yolo_data/images/zidane.jpg',  # filename
             'https://github.com/ultralytics/yolov3/raw/master/data/images/bus.jpg',  # URI
             np.zeros((640, 480, 3))]  # numpy
 

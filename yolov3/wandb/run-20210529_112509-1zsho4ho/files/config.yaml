@@ -39,16 +39,16 @@ cfg:
   value: ''
 data:
   desc: null
-  value: ./data/leaf.yaml
+  value: ./original_yolo_data/leaf.yaml
 data_dict:
   desc: null
   value:
     names:
     - leaf
     nc: 1
-    test: ./data/leaf_2012_test.txt
-    train: ./data/leaf_2012_train.txt
-    val: ./data/leaf_2012_val.txt
+    test: ./original_yolo_data/leaf_2012_test.txt
+    train: ./original_yolo_data/leaf_2012_train.txt
+    val: ./original_yolo_data/leaf_2012_val.txt
 device:
   desc: null
   value: ''
@@ -139,7 +139,7 @@ opt:
     bucket: ''
     cache_images: false
     cfg: ''
-    data: ./data/leaf.yaml
+    data: ./original_yolo_data/leaf.yaml
     device: ''
     entity: null
     epochs: 1

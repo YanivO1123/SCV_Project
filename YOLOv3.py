@@ -135,7 +135,7 @@ class Darknet(nn.Module):
                 bn_running_mean = bn_running_mean.view_as(bn.running_mean)
                 bn_running_var = bn_running_var.view_as(bn.running_var)
 
-                #Copy the data to model
+                #Copy the original_yolo_data to model
                 bn.bias.data.copy_(bn_biases)
                 bn.weight.data.copy_(bn_weights)
                 bn.running_mean.copy_(bn_running_mean)
@@ -151,7 +151,7 @@ class Darknet(nn.Module):
                 # reshape the loaded weights according to the dims of the model weights
                 conv_biases = conv_biases.view_as(conv.bias.data)
 
-                # Finally copy the data
+                # Finally copy the original_yolo_data
                 conv.bias.data.copy_(conv_biases)
 
             # Let us load the weights for the Convolutional layers

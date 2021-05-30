@@ -54,7 +54,7 @@ start = 0
 CUDA = torch.cuda.is_available()
 
 num_classes = 80    #For COCO
-classes = load_classes("data/coco.names")
+classes = load_classes("original_yolo_data/coco.names")
 
 
 #Set up the neural network

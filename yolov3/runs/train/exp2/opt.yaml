@@ -1,7 +1,7 @@
 weights: yolov3.pt
 cfg: ''
-data: ./data/leaf.yaml
-hyp: data/hyp.scratch.yaml
+data: ./original_yolo_data/leaf.yaml
+hyp: original_yolo_data/hyp.scratch.yaml
 epochs: 1
 batch_size: 1
 img_size:

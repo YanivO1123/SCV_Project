@@ -1,7 +1,7 @@
 #!/bin/bash
 # COCO 2017 dataset http://cocodataset.org
-# Download command: bash data/scripts/get_coco.sh
-# Train command: python train.py --data leaf.yaml
+# Download command: bash original_yolo_data/scripts/get_coco.sh
+# Train command: python train.py --original_yolo_data leaf.yaml
 # Default dataset location is next to /yolov3:
 #   /parent_folder
 #     /coco
