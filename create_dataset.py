@@ -245,7 +245,7 @@ def setupCreateLabels():
 # setup creating of txts with all file name from aug files
 def prepareTxtsAugment():
     # Create the train.txt and test.txt
-    directory = "./leaf_data/images/train/output/"
+    directory = "/leaf_data/images/train/output/"
     target_file_train = "yolov3/data/auged_leaf_train.txt"
     target_file_test = "yolov3/data/auged_leaf_test.txt"
     target_file_val = "yolov3/data/auged_leaf_val.txt"
@@ -254,9 +254,9 @@ def prepareTxtsAugment():
     index = 0
     for targets in all_targets:
         if index == 1:
-            directory = "./leaf_data/images/test/output/"
+            directory = "/leaf_data/images/test/output/"
         if index == 2:
-            directory = "./leaf_data/images/validate/output/"
+            directory = "/leaf_data/images/validate/output/"
         createTxts(directory, targets)
         index += 1
 
@@ -265,7 +265,7 @@ def prepareTxtsAugment():
 # Create txt files containing train / test / val file names
 def prepareTxts():
     # Create the train.txt and test.txt
-    directory = "./leaf_data/images/train/"
+    directory = "/leaf_data/images/train/"
     target_file_train = "yolov3/data/leaf_train.txt"
     target_file_test = "yolov3/data/leaf_test.txt"
     target_file_val = "yolov3/data/leaf_val.txt"
@@ -280,9 +280,9 @@ def prepareTxts():
     index = 0
     for targets in all_targets:
         if index == 1:
-            directory = "./leaf_data/images/test/"
+            directory = "/leaf_data/images/test/"
         if index == 2:
-            directory = "./leaf_data/images/validate/"
+            directory = "/leaf_data/images/validate/"
         createTxts(directory, targets)
         index += 1
 
@@ -292,10 +292,10 @@ def createTxts(images_directory, txt_target):
     images_list_to_write = []
     # shapes_to_write = []
 
-    for file in os.listdir(images_directory):
+    for file in os.listdir('.' + images_directory):
         filename = os.fsdecode(file)
         if filename.endswith(".png"):
-            images_list_to_write.append(images_directory + filename)
+            images_list_to_write.append('..'+images_directory + filename)
             # image = cv2.imread(images_directory + filename)
             # Log width, height because im pretty sure that's what yolo expect
             # shapes_to_write.append([image.shape[1], image.shape[0]])
@@ -311,11 +311,11 @@ def createTxts(images_directory, txt_target):
 
 if __name__ == "__main__":
     # remove_existing_files()
-    number_auged_images_to_create = 3
-    moveImagesFromOriginalDataset()
-    generated_augmented_image_filenames = createAugmentedDataset(number_auged_images_to_create)
-    move_Agumented()
-    print("Check in console that the resulting file names are what is expected - only the last ID string of the generated file")
-    setupCreateLabels()
+    # number_auged_images_to_create = 3
+    # moveImagesFromOriginalDataset()
+    # generated_augmented_image_filenames = createAugmentedDataset(number_auged_images_to_create)
+    # move_Agumented()
+    # print("Check in console that the resulting file names are what is expected - only the last ID string of the generated file")
+    # setupCreateLabels()
     prepareTxts()
     prepareTxtsAugment()
