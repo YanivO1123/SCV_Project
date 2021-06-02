@@ -101,21 +101,21 @@ def moveImagesFromOriginalDataset():
     print("Finished moving images")
 
 # Create set of augmented images
-def createAugmentedDataset(num_images_to_generate):
+def createAugmentedDataset(number_auged_images_to_train, number_auged_images_to_test, number_auged_images_to_validate):
     # Augment train:
     images_data_directory = './leaf_data/images/train/'
     label_images_data_directory = './leaf_data/labels/train/'
-    augment(images_data_directory, label_images_data_directory, num_images_to_generate)
+    augment(images_data_directory, label_images_data_directory, number_auged_images_to_train)
 
     # Augment test:
     images_data_directory = './leaf_data/images/test/'
     label_images_data_directory = './leaf_data/labels/test/'
-    augment(images_data_directory, label_images_data_directory, num_images_to_generate)
+    augment(images_data_directory, label_images_data_directory, number_auged_images_to_test)
 
     # Augment val:
     images_data_directory = './leaf_data/images/validate/'
     label_images_data_directory = './leaf_data/labels/validate/'
-    augment(images_data_directory, label_images_data_directory, num_images_to_generate)
+    augment(images_data_directory, label_images_data_directory, number_auged_images_to_validate)
 
 # create augmented images from specific locations, for train / test / val
 def augment(images_path, labels_path, num_to_gen):
@@ -311,11 +311,15 @@ def createTxts(images_directory, txt_target):
 
 if __name__ == "__main__":
     # remove_existing_files()
-    # number_auged_images_to_create = 3
     # moveImagesFromOriginalDataset()
-    # generated_augmented_image_filenames = createAugmentedDataset(number_auged_images_to_create)
-    # move_Agumented()
-    # print("Check in console that the resulting file names are what is expected - only the last ID string of the generated file")
-    # setupCreateLabels()
+    # How many we wanna craete?
+    number_auged_images_to_train = 5000
+    number_auged_images_to_test = 500
+    number_auged_images_to_validate = 100
+    # Create and place and create txts
+    createAugmentedDataset(number_auged_images_to_train, number_auged_images_to_test, number_auged_images_to_validate)
+    move_Agumented()
+    print("Check in console that the resulting file names are what is expected - only the last ID string of the generated file")
+    setupCreateLabels()
     prepareTxts()
     prepareTxtsAugment()
