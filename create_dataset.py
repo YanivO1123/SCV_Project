@@ -215,8 +215,10 @@ def createLabels(labels_src):
             normalized_bbox = [min(bbox[0] / image_width, 1), min(bbox[1] / image_height, 1),
                                # Normalize the important 2
                                min(bbox[2] / image_width, 1), min(bbox[3] / image_height, 1)]  # And also the other 2
+            x_center = (normalized_bbox[0] + normalized_bbox[2]) / 2
+            y_center = (normalized_bbox[1] + normalized_bbox[3]) / 2
             # Write bounding box to file
-            f.write("%d %.6f %.6f %.6f %.6f\n" % (0, normalized_bbox[0], normalized_bbox[1], box_width, box_height))
+            f.write("%d %.6f %.6f %.6f %.6f\n" % (0, x_center, y_center, box_width, box_height))
 
         index += 1
 
@@ -317,9 +319,9 @@ if __name__ == "__main__":
     number_auged_images_to_test = 500
     number_auged_images_to_validate = 100
     # Create and place and create txts
-    createAugmentedDataset(number_auged_images_to_train, number_auged_images_to_test, number_auged_images_to_validate)
-    move_Agumented()
+    # createAugmentedDataset(number_auged_images_to_train, number_auged_images_to_test, number_auged_images_to_validate)
+    # move_Agumented()
     print("Check in console that the resulting file names are what is expected - only the last ID string of the generated file")
     setupCreateLabels()
-    prepareTxts()
-    prepareTxtsAugment()
+    # prepareTxts()
+    # prepareTxtsAugment()
