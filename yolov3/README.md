@@ -113,7 +113,7 @@ $ python detect.py --source data/images --weights yolov3.pt --conf 0.25
 
 ### PyTorch Hub
 
-To run **batched inference** with YOLOv5 and [PyTorch Hub](https://github.com/ultralytics/yolov5/issues/36):
+To run **batched inference** with YOLOv3 and [PyTorch Hub](https://github.com/ultralytics/yolov5/issues/36):
 ```python
 import torch
 
@@ -152,9 +152,9 @@ Ultralytics is a U.S.-based particle physics and AI startup with over 6 years of
 - **Edge AI** integrated into custom iOS and Android apps for realtime **30 FPS video inference.**
 - **Custom data training**, hyperparameter evolution, and model exportation to any destination.
 
-For business inquiries and professional support requests please visit us at https://www.ultralytics.com. 
+For business inquiries and professional support requests please visit us at https://ultralytics.com. 
 
 
 ## Contact
 
-**Issues should be raised directly in the repository.** For business inquiries or professional support requests please visit https://www.ultralytics.com or email Glenn Jocher at glenn.jocher@ultralytics.com. 
+**Issues should be raised directly in the repository.** For business inquiries or professional support requests please visit https://ultralytics.com or email Glenn Jocher at glenn.jocher@ultralytics.com. 

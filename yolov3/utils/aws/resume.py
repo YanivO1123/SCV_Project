@@ -19,12 +19,12 @@ for last in path.rglob('*/**/last.pt'):
 
     # Load opt.yaml
     with open(last.parent.parent / 'opt.yaml') as f:
-        opt = yaml.load(f, Loader=yaml.SafeLoader)
+        opt = yaml.safe_load(f)
 
     # Get device count
     d = opt['device'].split(',')  # devices
     nd = len(d)  # number of devices
-    ddp = nd > 1 or (nd == 0 and torch.cuda.device_count() > 1)  # distributed original_yolo_data parallel
+    ddp = nd > 1 or (nd == 0 and torch.cuda.device_count() > 1)  # distributed data parallel
 
     if ddp:  # multi-GPU
         port += 1

@@ -5,10 +5,178 @@ import Augmentor
 import shutil
 
 
+def removeLabelFilesPng():
+    src_train = "leaf_data/labels/train/output"
+    src_test = "leaf_data/labels/test/output"
+    src_validate = "leaf_data/labels/validate/output"
+    file_names = os.listdir(src_train)
+    for file_name in file_names:
+        if file_name.endswith(".png"):
+            os.remove(os.path.join(src_train, file_name))
+
+    file_names = os.listdir(src_test)
+    for file_name in file_names:
+        if file_name.endswith(".png"):
+            os.remove(os.path.join(src_test, file_name))
+
+    file_names = os.listdir(src_validate)
+    for file_name in file_names:
+        if file_name.endswith(".png"):
+            os.remove(os.path.join(src_validate, file_name))
+
+    src_train = "leaf_data/labels/train/"
+    src_test = "leaf_data/labels/test/"
+    src_validate = "leaf_data/labels/validate/"
+    file_names = os.listdir(src_train)
+    for file_name in file_names:
+        if file_name.endswith(".png"):
+            os.remove(os.path.join(src_train, file_name))
+
+    file_names = os.listdir(src_test)
+    for file_name in file_names:
+        if file_name.endswith(".png"):
+            os.remove(os.path.join(src_test, file_name))
+
+    file_names = os.listdir(src_validate)
+    for file_name in file_names:
+        if file_name.endswith(".png"):
+            os.remove(os.path.join(src_validate, file_name))
+
+def removeLabelFilesTxT():
+    src_train = "leaf_data/labels/train/output"
+    src_test = "leaf_data/labels/test/output"
+    src_validate = "leaf_data/labels/validate/output"
+    file_names = os.listdir(src_train)
+    for file_name in file_names:
+        if file_name.endswith(".txt"):
+            os.remove(os.path.join(src_train, file_name))
+
+    file_names = os.listdir(src_test)
+    for file_name in file_names:
+        if file_name.endswith(".txt"):
+            os.remove(os.path.join(src_test, file_name))
+
+    file_names = os.listdir(src_validate)
+    for file_name in file_names:
+        if file_name.endswith(".txt"):
+            os.remove(os.path.join(src_validate, file_name))
+
+    src_train = "leaf_data/labels/train/"
+    src_test = "leaf_data/labels/test/"
+    src_validate = "leaf_data/labels/validate/"
+    file_names = os.listdir(src_train)
+    for file_name in file_names:
+        if file_name.endswith(".txt"):
+            os.remove(os.path.join(src_train, file_name))
+
+    file_names = os.listdir(src_test)
+    for file_name in file_names:
+        if file_name.endswith(".txt"):
+            os.remove(os.path.join(src_test, file_name))
+
+    file_names = os.listdir(src_validate)
+    for file_name in file_names:
+        if file_name.endswith(".txt"):
+            os.remove(os.path.join(src_validate, file_name))
+
+    # print(file_names)
+
+def moveImagesFromOriginalDatasetAndResize(resize_to):
+    print(f"Starting to move images from original dataset into yolo target directories, and saving as {resize_to},{resize_to}")
+    print("Starting with train images")
+    source_dir_2012 = './original_dataset/Ara2012'
+    source_dir_2013 = './original_dataset/Ara2013-Canon'
+
+    # Train files - 90 files from 2012, 120 from 2013
+    list_ara2012_train = ["%03d" % i for i in range(1, 91)]
+    list_ara2013_canon_train = ["%03d" % i for i in range(1, 121)]
+    target_dir_rgb = 'leaf_data/images/train'
+    target_dir_label = 'leaf_data/labels/train'
+
+    for file_index in list_ara2012_train:
+        # Load image, resize, save to right directory
+        filepath_rgb = source_dir_2012 + "/ara2012_plant" + file_index + "_rgb.png"
+        img = cv2.imread(filepath_rgb)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_rgb + "/ara2012_plant" + file_index + ".png", resized)
+
+        filepath_label = source_dir_2012 + "/ara2012_plant" + file_index + "_label.png"
+        img = cv2.imread(filepath_label)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_label + "/ara2012_plant" + file_index + ".png", resized)
+
+    for file_index in list_ara2013_canon_train:
+        filepath_rgb = source_dir_2013 + "/ara2013_plant" + file_index + "_rgb.png"
+        img = cv2.imread(filepath_rgb)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_rgb + "/ara2013_plant" + file_index + ".png", resized)
+
+        filepath_label = source_dir_2013 + "/ara2013_plant" + file_index + "_label.png"
+        img = cv2.imread(filepath_label)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_label + "/ara2013_plant" + file_index + ".png", resized)
+
+        # test files - 90-110 from 2012, 120-150 from 2013
+    print("Starting with test images")
+    list_ara2012_test = ["%03d" % i for i in range(91, 111)]
+    list_ara2013_canon_test = ["%03d" % i for i in range(121, 151)]
+    target_dir_rgb = 'leaf_data/images/test'
+    target_dir_label = 'leaf_data/labels/test'
+    for file_index in list_ara2012_test:
+        filepath_rgb = source_dir_2012 + "/ara2012_plant" + file_index + "_rgb.png"
+        img = cv2.imread(filepath_rgb)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_rgb + "/ara2012_plant" + file_index + ".png", resized)
+
+        filepath_label = source_dir_2012 + "/ara2012_plant" + file_index + "_label.png"
+        img = cv2.imread(filepath_label)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_label + "/ara2012_plant" + file_index + ".png", resized)
+
+    for file_index in list_ara2013_canon_test:
+        filepath_rgb = source_dir_2013 + "/ara2013_plant" + file_index + "_rgb.png"
+        img = cv2.imread(filepath_rgb)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_rgb + "/ara2013_plant" + file_index + ".png", resized)
+
+        filepath_label = source_dir_2013 + "/ara2013_plant" + file_index + "_label.png"
+        img = cv2.imread(filepath_label)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_label + "/ara2013_plant" + file_index + ".png", resized)
+
+    # validate files
+    print("Starting with validation images")
+    list_ara2012_val = ["%03d" % i for i in range(111, 121)]
+    list_ara2013_canon_val = ["%03d" % i for i in range(151, 166)]
+    target_dir_rgb = 'leaf_data/images/validate'
+    target_dir_label = 'leaf_data/labels/validate'
+    for file_index in list_ara2012_val:
+        filepath_rgb = source_dir_2012 + "/ara2012_plant" + file_index + "_rgb.png"
+        img = cv2.imread(filepath_rgb)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_rgb + "/ara2012_plant" + file_index + ".png", resized)
+
+        filepath_label = source_dir_2012 + "/ara2012_plant" + file_index + "_label.png"
+        img = cv2.imread(filepath_label)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_label + "/ara2012_plant" + file_index + ".png", resized)
+
+    for file_index in list_ara2013_canon_val:
+        filepath_rgb = source_dir_2013 + "/ara2013_plant" + file_index + "_rgb.png"
+        img = cv2.imread(filepath_rgb)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_rgb + "/ara2013_plant" + file_index + ".png", resized)
+
+        filepath_label = source_dir_2013 + "/ara2013_plant" + file_index + "_label.png"
+        img = cv2.imread(filepath_label)
+        resized = cv2.resize(img, (resize_to, resize_to))
+        cv2.imwrite(target_dir_label + "/ara2013_plant" + file_index + ".png", resized)
+
+    print("Finished moving images")
 
 # Move images from original dataset to target directories of train / test / val
 def moveImagesFromOriginalDataset():
-    print(os.getcwdb())
+    # print(os.getcwdb())
     print("Starting to move images from original dataset into yolo target directories")
     print("Starting with train images")
     source_dir_2012 = './original_dataset/Ara2012'
@@ -233,7 +401,10 @@ def setupCreateLabels():
     createLabels(src)
     src = "leaf_data/labels/validate/"
     createLabels(src)
+    print("Finished generating labels for original images")
 
+
+def setupCreateLabelsAugmented():
     # For the augmented images
     src = "leaf_data/labels/train/output/"
     createLabels(src)
@@ -242,7 +413,7 @@ def setupCreateLabels():
     src = "leaf_data/labels/validate/output/"
     createLabels(src)
 
-    print("Finished generating labels")
+    print("Finished generating labels for augmented images")
 
 # setup creating of txts with all file name from aug files
 def prepareTxtsAugment():
@@ -312,16 +483,20 @@ def createTxts(images_directory, txt_target):
 # Create yaml
 
 if __name__ == "__main__":
-    # remove_existing_files()
+    resize_to = 416
+    number_auged_images_to_train = 3000
+    number_auged_images_to_test = 100
+    number_auged_images_to_validate = 10
+    # removeLabelFilesTxT()
+    # moveImagesFromOriginalDatasetAndResize(resize_to)
     # moveImagesFromOriginalDataset()
     # How many we wanna craete?
-    number_auged_images_to_train = 5000
-    number_auged_images_to_test = 500
-    number_auged_images_to_validate = 100
+
     # Create and place and create txts
     # createAugmentedDataset(number_auged_images_to_train, number_auged_images_to_test, number_auged_images_to_validate)
     # move_Agumented()
     print("Check in console that the resulting file names are what is expected - only the last ID string of the generated file")
-    setupCreateLabels()
-    # prepareTxts()
-    # prepareTxtsAugment()
+    # setupCreateLabels()
+    # setupCreateLabelsAugmented()
+    prepareTxts()
+    prepareTxtsAugment()

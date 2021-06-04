@@ -3,7 +3,6 @@
 import numpy as np
 import torch
 import yaml
-from scipy.cluster.vq import kmeans
 from tqdm import tqdm
 
 from utils.general import colorstr
@@ -21,7 +20,7 @@ def check_anchor_order(m):
 
 
 def check_anchors(dataset, model, thr=4.0, imgsz=640):
-    # Check anchor fit to original_yolo_data, recompute if necessary
+    # Check anchor fit to data, recompute if necessary
     prefix = colorstr('autoanchor: ')
     print(f'\n{prefix}Analyzing anchors... ', end='')
     m = model.module.model[-1] if hasattr(model, 'module') else model.model[-1]  # Detect()
@@ -59,7 +58,7 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
     print('')  # newline
 
 
-def kmean_anchors(path='./original_yolo_data/leaf128.yaml', n=9, img_size=640, thr=4.0, gen=1000, verbose=True):
+def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=1000, verbose=True):
     """ Creates kmeans-evolved anchors from training dataset
 
         Arguments:
@@ -76,6 +75,8 @@ def kmean_anchors(path='./original_yolo_data/leaf128.yaml', n=9, img_size=640, t
         Usage:
             from utils.autoanchor import *; _ = kmean_anchors()
     """
+    from scipy.cluster.vq import kmeans
+
     thr = 1. / thr
     prefix = colorstr('autoanchor: ')
 
@@ -102,7 +103,7 @@ def kmean_anchors(path='./original_yolo_data/leaf128.yaml', n=9, img_size=640, t
 
     if isinstance(path, str):  # *.yaml file
         with open(path) as f:
-            data_dict = yaml.load(f, Loader=yaml.SafeLoader)  # model dict
+            data_dict = yaml.safe_load(f)  # model dict
         from utils.datasets import LoadImagesAndLabels
         dataset = LoadImagesAndLabels(data_dict['train'], augment=True, rect=True)
     else:
