@@ -1,12 +1,12 @@
-weights: yolov3.pt
+weights: yolov3-tiny.pt
 cfg: ''
-data: ./original_yolo_data/leaf.yaml
-hyp: original_yolo_data/hyp.scratch.yaml
-epochs: 1
-batch_size: 0
+data: data/leaf.yaml
+hyp: data/hyp.scratch.yaml
+epochs: 60
+batch_size: 16
 img_size:
-- 640
-- 640
+- 416
+- 416
 rect: false
 resume: false
 nosave: false
@@ -37,4 +37,4 @@ artifact_alias: latest
 world_size: 1
 global_rank: -1
 save_dir: runs/train/exp
-total_batch_size: 0
+total_batch_size: 16
