@@ -25,6 +25,7 @@ The results, along with the trained weights, are automatically generated into ru
 
 ## Detection:
 In order to detect, we call: python detect.py --weights path_to_weights --source images_to_detect_on --img-size 416
+The trained weights are available in the path "./yolov3/runs/train/exp/weights/best" 
 
 Or simply, python detect.py (the defaults have been pre configured as for the above).
 
