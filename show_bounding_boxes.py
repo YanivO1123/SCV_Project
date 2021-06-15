@@ -1,13 +1,11 @@
 #!/usr/local/bin/python3
 import cv2
-import numpy as np
 import pandas as pd
 
 def plotbbox_old_labels():
-    list_ara2012 = ["%03d" % i for i in range(119, 120)]
-    #list_ara2013_canon = ["%03d" % i for i in range(1, 166)]
+    image_numbers = ["%03d" % i for i in range(1, 3)]
 
-    for i in ["001"]:#list_ara2012:
+    for i in image_numbers:
         print(i)
         image = cv2.imread("original_dataset/Ara2012/ara2012_plant" + i + "_label.png")
         coordinates = pd.read_csv("leaf/labels/train/ara2012_plant" + i + "_rgb.txt", sep="\s+", header=None)
@@ -26,17 +24,16 @@ def plotbbox_old_labels():
             image = cv2.circle(image, (x_coordinate_left, y_coordinate_bottom), radius=3, color=(colors[j][0], colors[j][1], colors[j][2]), thickness=-1)
             image = cv2.circle(image, (x_coordinate_right, y_coordinate_bottom), radius=3, color=(colors[j][0], colors[j][1], colors[j][2]), thickness=-1)
 
-    # Save (just one for testing)
-    cv2.imwrite("leaf/images/result.png", image)
+        # Save new image
+        cv2.imwrite("leaf_data/show_bounding_boxes/bounding_boxes" + i + ".png", image)
 
 def plotbbox_new_labels():
-    list_ara2012 = ["%03d" % i for i in range(119, 120)]
-    # list_ara2013_canon = ["%03d" % i for i in range(1, 166)]
+    image_numbers = ["%03d" % i for i in range(1, 4)]
 
-    for i in ["001"]:  # list_ara2012:
+    for i in image_numbers:
         print(i)
-        image = cv2.imread("original_dataset/Ara2012/ara2012_plant" + i + "_label.png")
-        coordinates = pd.read_csv("leaf/labels/train/ara2012_plant" + i + "_rgb.txt", sep="\s+", header=None)
+        image = cv2.imread("leaf_data/images/train/ara2012_plant" + i + ".png")
+        coordinates = pd.read_csv("leaf_data/labels/train/ara2012_plant" + i + ".txt", sep="\s+", header=None)
         coordinates.columns = ['class', 'x_center', 'y_center', 'w', 'h']
         height = image.shape[0]
         width = image.shape[1]
@@ -59,8 +56,8 @@ def plotbbox_new_labels():
             image = cv2.circle(image, (x_coordinate_left, y_coordinate_bottom), radius=3,color=(colors[j][0], colors[j][1], colors[j][2]), thickness=-1)
             image = cv2.circle(image, (x_coordinate_right, y_coordinate_bottom), radius=3,color=(colors[j][0], colors[j][1], colors[j][2]), thickness=-1)
 
-    # Save (just one for testing)
-    cv2.imwrite("leaf/images/result_new.png", image)
+        # Save new image
+        cv2.imwrite("leaf_data/show_bounding_boxes/bounding_boxes" + i + ".png", image)
 
 if __name__ == "__main__":
     # plotbbox_old_labels()

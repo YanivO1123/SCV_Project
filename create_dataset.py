@@ -299,10 +299,9 @@ def augment(images_path, labels_path, num_to_gen):
     p.zoom_random(probability=0.5, percentage_area=0.8)
     p.flip_top_bottom(probability=0.5)
 
-    # Make me images bitch!
+    # Create images
     p.sample(num_to_gen)
 
-    # return p.get_ground_truth_paths()
 
 # Move augmented images to the right dir
 def move_Agumented():
@@ -322,6 +321,7 @@ def move_Agumented():
     move_files(source_val, target_val)
 
     print("Finished moving and renaming generated files")
+
 
 def move_files(source_train, target_train):
     file_names = os.listdir(source_train)
@@ -356,6 +356,7 @@ def move_files(source_train, target_train):
                 new_file = os.path.join(source_train, new_file_name)
                 os.rename(old_file, new_file)
 
+
 def createLabels(labels_src):
     index = 0
     src_files = os.listdir(labels_src)
@@ -376,13 +377,12 @@ def createLabels(labels_src):
         for color in list_of_colors[1:]:
             # Get the masked pixels (all the pixels of this color)
             [leaf_y, leaf_x] = np.where(np.all(segmented_image == color, axis=-1))
-            # Build ze bounding box
+            # Build the bounding box
             bbox = [np.min(leaf_x), np.min(leaf_y), np.max(leaf_x), np.max(leaf_y)]
             box_width = min((bbox[2] - bbox[0]) / image_width, 1)  # Width of bbox, max 1
             box_height = min((bbox[3] - bbox[1]) / image_height, 1)  # Height of bbox
             normalized_bbox = [min(bbox[0] / image_width, 1), min(bbox[1] / image_height, 1),
-                               # Normalize the important 2
-                               min(bbox[2] / image_width, 1), min(bbox[3] / image_height, 1)]  # And also the other 2
+                               min(bbox[2] / image_width, 1), min(bbox[3] / image_height, 1)]
             x_center = (normalized_bbox[0] + normalized_bbox[2]) / 2
             y_center = (normalized_bbox[1] + normalized_bbox[3]) / 2
             # Write bounding box to file
@@ -390,10 +390,11 @@ def createLabels(labels_src):
 
         index += 1
 
+
 # Create labels
 def setupCreateLabels():
     print("Starting with label-creation")
-    # Generates BBOXs based on the segmented file:
+    # Generates bounding boxes based on the segmented file:
     # For the original images
     src = "leaf_data/labels/train/"
     createLabels(src)
@@ -415,6 +416,7 @@ def setupCreateLabelsAugmented():
 
     print("Finished generating labels for augmented images")
 
+
 # setup creating of txts with all file name from aug files
 def prepareTxtsAugment():
     # Create the train.txt and test.txt
@@ -434,6 +436,7 @@ def prepareTxtsAugment():
         index += 1
 
     print("Finished generating the train.txt file for the augmented images")
+
 
 # Create txt files containing train / test / val file names
 def prepareTxts():
@@ -461,6 +464,7 @@ def prepareTxts():
 
     print("Finished generating the train.txt files for the original images")
 
+
 def createTxts(images_directory, txt_target):
     images_list_to_write = []
     # shapes_to_write = []
@@ -480,23 +484,34 @@ def createTxts(images_directory, txt_target):
     # np.savetxt(shape_target, shapes_to_write, delimiter=" ", newline="\n",
                # fmt="%s %s")
 
-# Create yaml
 
 if __name__ == "__main__":
     resize_to = 416
-    number_auged_images_to_train = 3000
-    number_auged_images_to_test = 100
+    number_auged_images_to_train = 10
+    number_auged_images_to_test = 10
     number_auged_images_to_validate = 10
-    # removeLabelFilesTxT()
-    # moveImagesFromOriginalDatasetAndResize(resize_to)
-    # moveImagesFromOriginalDataset()
-    # How many we wanna craete?
 
-    # Create and place and create txts
+    # Step 0: Create directories as specified in the README
+
+    # Step 1: Augment images
+    moveImagesFromOriginalDataset()
+
+    # Step 2: Augment images
     # createAugmentedDataset(number_auged_images_to_train, number_auged_images_to_test, number_auged_images_to_validate)
+
+    # Step 3: Move augmented image
     # move_Agumented()
-    print("Check in console that the resulting file names are what is expected - only the last ID string of the generated file")
+
+    # Step 4: Create labels for original images
     # setupCreateLabels()
+
+    # Step 5: Create labels for the augmented images
     # setupCreateLabelsAugmented()
-    prepareTxts()
-    prepareTxtsAugment()
+
+    # Step 6:
+    # prepareTxts()
+
+    # Step 7:
+    # prepareTxtsAugment()
+
+    print("Check in console that the resulting file names are what is expected - only the last ID string of the generated file")
