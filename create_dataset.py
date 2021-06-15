@@ -304,7 +304,7 @@ def augment(images_path, labels_path, num_to_gen):
 
 
 # Move augmented images to the right dir
-def move_Agumented():
+def moveAugmented():
     # Move train
     source_train = './leaf_data/images/train/output'
     target_train = './leaf_data/labels/train/output'
@@ -500,7 +500,7 @@ if __name__ == "__main__":
     # createAugmentedDataset(number_auged_images_to_train, number_auged_images_to_test, number_auged_images_to_validate)
 
     # Step 3: Move augmented image
-    # move_Agumented()
+    # moveAugmented()
 
     # Step 4: Create labels for original images
     # setupCreateLabels()
